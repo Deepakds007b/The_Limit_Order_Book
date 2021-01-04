@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
-import json
 import xlrd
 import openpyxl
 from openpyxl import load_workbook
@@ -47,10 +46,6 @@ def orderbook():
     sheet1 = wb1.sheet_by_index(0)
     wb2 = xlrd.open_workbook(sell)
     sheet2 = wb2.sheet_by_index(0)
-    wb1 = load_workbook(buy)
-    ws1 = wb1.worksheets[0]
-    wb2 = load_workbook(sell)
-    ws2 = wb2.worksheets[0]
     n = 5
     i=0
     while (i < n):

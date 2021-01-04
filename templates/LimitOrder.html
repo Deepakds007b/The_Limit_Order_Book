@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    
+    <title>Limit Order</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            margin-left: -5px;
+            margin-right: -5px;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 5px;
+        }
+
+        /* Clearfix (clear floats) */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .nav {
+            overflow: hidden;
+            background-color: #05386B;
+        }
+
+        .nav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .nav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="nav">
+        <a  href="/">Home</a>
+        <a href="/orderbook">Order Book</a>
+        <a href="/MarketOrder">Market Order</a>
+        <a class="active" href="/LimitOrder">Limit Order</a>
+      </div>
+      <h1 style="text-align: center;padding-top: 30px;">Entering a Limit Order</h1>
+<p style="text-align: center;padding-left: 200px;padding-right: 200px;">You can also buy or sell stock with a limit order. In this type of order, you specify the highest/lowest price at which you will buy/sell. With a limit order, you are guaranteed the price at which you will buy or sell (if the trade is executed); however, you are not guaranteed that you will actually trade.</p>
+       <hr>
+        <p style="text-align: center;color: red;font-size: 1.2em;">The Current Date and Time is : {{date}}</p>
+        <hr>
+        <div style="padding-left: 200px;">
+            <form style="display:inline;" name="book_input" id="book_input" action="/limitorderbuying" method="post" novalidate>
+                <label>Enter Price</label>
+                <input type="number" id="price" name="price"></input>
+                
+                <label style="margin-left:50px">Enter size</label>
+                <input type="number" id="size" name="size"></input>
+                
+                <input style="margin-left:50px"type="radio" id ="Buy" name="rad_val" value="Buy">
+                <label for="Buy">Buy</label>
+                <input type="radio" id ="Sell" name="rad_val" value="Sell">
+                <label for="Sell">Sell</label>
+                
+                
+                <button type="submit" class="btn btn-primary" style="margin-left:50px">Submit</button>
+            </form>
+        </div>
+        <hr>
+        <div class="row">
+    
+            <div class="column">
+                <h3 style="padding-left: 300px;">Buy Side</h3>
+                <table>
+                    <tr>
+                        <th style="padding-left: 100px;">Price</th>
+                        <th>Ask size</th>
+                    </tr>
+                    {% for i in buy_price %}
+                    {% set item_1 = buy_price[loop.index-1] %}
+                    {% set item_2 = buy_share[loop.index-1] %}
+                    <tr>
+                        <th style="padding-left: 100px;">{{i}}</th>
+                        <th>{{item_2}}</th>
+        
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="column">
+                <h3 style="padding-left: 300px;">Sell Side</h3>
+                <table>
+                    <tr>
+                        <th style="padding-left: 100px;">Price</th>
+                        <th>Bid Size</th>
+                    </tr>
+                    {% for item1 in sell_price %}
+                    {% set item_1 = sell_price[loop.index-1] %}
+                    {% set item_2 = sell_share[loop.index-1] %}
+                    <tr>
+                        <th style="padding-left: 100px;">{{item_1}}</th>
+                        <th>{{item_2}}</th>
+        
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+          }
+        </script>
+        <footer style="color: #05386B;" class="my-5 pt-5 text-center text-small">
+            <p class="mb-1">&copy; 2020–2021 Limit Order Book</p>
+          </footer>
+        
+</body>
+</html>

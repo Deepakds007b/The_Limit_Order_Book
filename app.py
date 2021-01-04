@@ -117,26 +117,26 @@ def MarketOrderbuying():
         print(radio_value)
         i=0
         if(radio_value=="Buy"):
-            if (sheet1.cell_value(i, 1) < float(entered_size)):
+            if (sheet1.cell_value(i, 0) < float(entered_size)):
                 d = ws1.cell(row = i+1,column=2)
                 entered_size = float(entered_size) - d.value
                 d.value = 0   
                 wb1.save(buy)    
                 i = i+1
                 return share(buy,float(entered_size),i)       
-            elif(sheet1.cell_value(i, 1) >= float(entered_size)):
+            elif(sheet1.cell_value(i, 0) >= float(entered_size)):
                 d = ws1.cell(row=i+1, column=2)
                 d.value = d.value-float(entered_size)
         i=0
         if(radio_value=="Sell"):
-            if (sheet2.cell_value(i, 1) < float(entered_size)):
+            if (sheet2.cell_value(i, 0) < float(entered_size)):
                 d = ws2.cell(row = i+1,column=2)
                 entered_size = float(entered_size) - d.value
                 d.value = 0   
                 wb2.save(sell)    
                 i = i+1
                 return share(sell,float(entered_size),i)       
-            elif(sheet2.cell_value(i, 1) >= float(entered_size)):
+            elif(sheet2.cell_value(i, 0) >= float(entered_size)):
                 d = ws2.cell(row=i+1, column=2)
                 d.value = d.value-float(entered_size)
 
